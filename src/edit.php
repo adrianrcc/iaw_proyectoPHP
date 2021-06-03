@@ -5,13 +5,23 @@ include_once("config.php");
 if(isset($_POST['update'])) {
 	$id = mysqli_real_escape_string($mysqli, $_POST['id']);
 	$name = mysqli_real_escape_string($mysqli, $_POST['name']);
+	$apellido1 = mysqli_real_escape_string($mysqli, $_POST['apellido1']);
+	$apellido2 = mysqli_real_escape_string($mysqli, $_POST['apellido2']);
 	$age = mysqli_real_escape_string($mysqli, $_POST['age']);
 	$email = mysqli_real_escape_string($mysqli, $_POST['email']);
 
 	// checking empty fields
-	if(empty($name) || empty($age) || empty($email)) {
+	if(empty($name) || empty($apellido1) || empty($apellido2) || empty($age) || empty($email)) {
 		if(empty($name)) {
 			echo "<font color='red'>Name field is empty.</font><br/>";
+		}
+
+		if(empty($apellido1)) {
+			echo "<font color='red'>Apellido1 field is empty.</font><br/>";
+		}
+
+		if(empty($apellido2)) {
+			echo "<font color='red'>Apellido2 field is empty.</font><br/>";
 		}
 
 		if(empty($age)) {
@@ -23,8 +33,8 @@ if(isset($_POST['update'])) {
 		}
 	} else {
 		// updating the table
-		$stmt = mysqli_prepare($mysqli, "UPDATE users SET name=?,age=?,email=? WHERE id=?");
-		mysqli_stmt_bind_param($stmt, "sisi", $name, $age, $email, $id);
+		$stmt = mysqli_prepare($mysqli, "UPDATE users SET name=?,apellido1=?,apellido2=?,age=?,email=? WHERE id=?");
+		mysqli_stmt_bind_param($stmt, "sssisi", $name, $apellido1, $apellido2, $age, $email, $id);
 		mysqli_stmt_execute($stmt);
 		mysqli_stmt_free_result($stmt);
 		mysqli_stmt_close($stmt);
@@ -40,10 +50,10 @@ if(isset($_POST['update'])) {
 $id = $_GET['id'];
 
 // selecting data associated with this particular id
-$stmt = mysqli_prepare($mysqli, "SELECT name, age, email FROM users WHERE id=?");
+$stmt = mysqli_prepare($mysqli, "SELECT name, apellido1, apellido2, age, email FROM users WHERE id=?");
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $name, $age, $email);
+mysqli_stmt_bind_result($stmt, $name, $apellido1, $apellido2, $age, $email);
 mysqli_stmt_fetch($stmt);
 mysqli_stmt_free_result($stmt);
 mysqli_stmt_close($stmt);
@@ -73,6 +83,16 @@ mysqli_close($mysqli);
 		<div class="form-group">
 			<label for="name">Name</label>
 			<input type="text" class="form-control" name="name" value="<?php echo $name;?>">
+		</div>
+
+		<div class="form-group">
+			<label for="name">Apellido1</label>
+			<input type="text" class="form-control" name="apellido1" value="<?php echo $apellido1;?>">
+		</div>
+
+		<div class="form-group">
+			<label for="name">Apellido2</label>
+			<input type="text" class="form-control" name="apellido2" value="<?php echo $apellido2;?>">
 		</div>
 
 		<div class="form-group">
