@@ -24,7 +24,7 @@ $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
 	<table width='80%' border=0 class="table">
 
 	<tr bgcolor='#CCCCCC'>
-		<td>Name</td>
+		<td>Name</td> <!--Define la celda de una tabla que contiene datos. -->
 		<td>Apellido1</td>
 		<td>Apellido2</td>
 		<td>Age</td>

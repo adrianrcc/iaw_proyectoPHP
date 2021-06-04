@@ -1,5 +1,5 @@
 <?php
-// including the database connection file
+// REFERENCIA AL ARCHIVO DE CONFIGURACIÓN DE LA BASE DE DATOS
 include_once("config.php");
 
 if(isset($_POST['update'])) {
@@ -10,7 +10,7 @@ if(isset($_POST['update'])) {
 	$age = mysqli_real_escape_string($mysqli, $_POST['age']);
 	$email = mysqli_real_escape_string($mysqli, $_POST['email']);
 
-	// checking empty fields
+	// COMPRUEBA SI HAY CAMPOS VACÍOS Y AVISA
 	if(empty($name) || empty($apellido1) || empty($apellido2) || empty($age) || empty($email)) {
 		if(empty($name)) {
 			echo "<font color='red'>Name field is empty.</font><br/>";
@@ -32,7 +32,7 @@ if(isset($_POST['update'])) {
 			echo "<font color='red'>Email field is empty.</font><br/>";
 		}
 	} else {
-		// updating the table
+		// ACTUALIZA TABLA
 		$stmt = mysqli_prepare($mysqli, "UPDATE users SET name=?,apellido1=?,apellido2=?,age=?,email=? WHERE id=?");
 		mysqli_stmt_bind_param($stmt, "sssisi", $name, $apellido1, $apellido2, $age, $email, $id);
 		mysqli_stmt_execute($stmt);
@@ -46,10 +46,10 @@ if(isset($_POST['update'])) {
 ?>
 
 <?php
-// getting id from url
+// CON GET COGE EL ID DE LA URL
 $id = $_GET['id'];
 
-// selecting data associated with this particular id
+// DATOS ACTUALIZADOS
 $stmt = mysqli_prepare($mysqli, "SELECT name, apellido1, apellido2, age, email FROM users WHERE id=?");
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
@@ -60,7 +60,7 @@ mysqli_stmt_close($stmt);
 mysqli_close($mysqli);
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE html><!-- DATOS ACTUALIZADOS HTML -->
 <html>
 <head>
 	<meta charset="UTF-8">

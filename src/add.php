@@ -15,7 +15,7 @@
 
 
 <?php
-// including the database connection file
+// REFERENCIA AL ARCHIVO DE CONFIGURACIÓN DE LA BASE DE DATOS
 include_once("config.php");
 
 if(isset($_POST['Submit'])) {
@@ -25,7 +25,7 @@ if(isset($_POST['Submit'])) {
 	$age = mysqli_real_escape_string($mysqli, $_POST['age']);
 	$email = mysqli_real_escape_string($mysqli, $_POST['email']);
 
-	// checking empty fields
+	// COMPRUEBA SI HAY CAMPOS VACÍOS Y AVISA
 	if(empty($name) || empty($apellido1) || empty($apellido2) || empty($age) || empty($email)) {
 		if(empty($name)) {
 			echo "<div class='alert alert-danger' role='alert'>Name field is empty</div>";
@@ -50,9 +50,9 @@ if(isset($_POST['Submit'])) {
 		// link to the previous page
 		echo "<a href='javascript:self.history.back();' class='btn btn-primary'>Go Back</a>";
 	} else {
-		// if all the fields are filled (not empty)
+		// SI NO HAY CAMPOS VACÍOS ¬
 
-		// insert data to database
+		// INSERTA DATOS EN LA BASE DE DATOS
 		$stmt = mysqli_prepare($mysqli, "INSERT INTO users(name,apellido1,apellido2,age,email) VALUES(?,?,?,?,?)");
 		mysqli_stmt_bind_param($stmt, "sssis", $name, $apellido1, $apellido2, $age, $email);
 		mysqli_stmt_execute($stmt);
