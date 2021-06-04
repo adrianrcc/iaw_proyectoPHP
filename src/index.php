@@ -1,8 +1,8 @@
 <?php
-// including the database connection file
+// REFERENCIA AL ARCHIVO DE CONFIGURACIÓN DE LA BASE DE DATOS
 include_once("config.php");
 
-// fetching data in descending order (lastest entry first)
+// NOS MUESTRA LOS USUARIOS ORDENADOS POR ID EN ORDEN DESCENDIENTE
 $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
 ?>
 
@@ -31,7 +31,12 @@ $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
 		<td>Email</td>
 		<td>Update</td>
 	</tr>
-
+	<!--
+	MySQLi: controlador de base de datos usado en php.
+	$stmt: 'statement' es una variable de propósito general usada en con MySQLi en diversas líneas.
+	$res: Variable utilizada para simplificar variables de resultado más complejas.
+	fetch: 'tomar' datos.
+	-->
 	<?php
 	while($res = mysqli_fetch_array($result)) {
 		echo "<tr>\n";
