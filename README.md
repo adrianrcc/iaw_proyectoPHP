@@ -20,6 +20,4 @@ Esta práctica consiste en un sistema muy básico para añadir, editar, borrar y
 - https://github.com/josejuansanchez/iaw-practica-lamp-docker
 - https://github.com/japsasir/iaw-proyecto-php
 - https://github.com/arr588/iaw-proyecto-php
-
-ec2-3-88-135-207.compute-1.amazonaws.com
-3.88.135.207
+- https://www.php.net/manual/es/book.mysqli.php
